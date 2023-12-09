@@ -15,7 +15,7 @@ public class multipleUsers {
 
 	WebDriver driver;
 
-@Given("the user is on the saucedemo login page")
+@Given("the user is on the Saucedemo login page")
 public void the_user_is_on_the_saucedemo_login_page() {
     // Write code here that turns the phrase above into concrete actions
 	 driver = new ChromeDriver();
@@ -41,18 +41,34 @@ public void click_on_the_login_button() {
     loginButton.click();
 
 }
-//h3[data-test="error"]
+////h3[data-test="error"]
+//@Then("the user should be {string}")
+//public void the_user_should_be(String login_status) {
+//    if(login_status.equals("successful")) 
+//      {
+//    WebElement product = driver.findElement(By.cssSelector(".product_label"));
+//     assertEquals("Products",product.getText());
+//    }
+//    else {
+//   WebElement errorElement =  driver.findElement(By.cssSelector("h3[data-test=\"error\"]"));
+//  assertEquals("Epic sadface: Sorry, this user has been locked out." ,errorElement.getText());
+//    }
+    
 @Then("the user should be {string}")
-public void the_user_should_be(String login_status) {
-    if(login_status.equals("successful")) 
-      {
-    WebElement product = driver.findElement(By.cssSelector(".product_label"));
-     assertEquals("Products",product.getText());
-    }
-    else {
-   WebElement errorElement =  driver.findElement(By.cssSelector("h3[data-test=\"error\"]"));
-  assertEquals("Epic sadface: Sorry, this user has been locked out." ,errorElement.getText());
-    }
+public void the_user_should_be(String loginStatus) {
+	 if (loginStatus.equals("successful")) {
+            // Assuming successful login redirects to a page with the header "Products"
+            WebElement productsHeader = driver.findElement(By.cssSelector(".product_label"));
+            assertEquals("Products", productsHeader.getText());
+        } else {
+            // Assuming unsuccessful login shows an error message
+            WebElement errorElement = driver.findElement(By.cssSelector("[data-test='error']"));
+            assertEquals("Epic sadface: Username and password do not match any user in this service",
+                    errorElement.getText());
+        }
+ 
+    
+    
     
   driver.quit();
  }

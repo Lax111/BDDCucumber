@@ -1,5 +1,5 @@
 
-Feature: Login to SauceDemo
+Feature: Logins to SauceDemo
 
   @smoke
   Scenario: User logs in valid credentials
